@@ -22,7 +22,7 @@ export default function RegisterScreen() {
             <Form.Group className='my-2' controlId='name'>
                 <Form.Label>Name</Form.Label>
                 <Form.Control
-                    type='name'
+                    type='text'
                     placeholder='Enter Name'
                     value={name}
                     onChange={ (e) => setName(e.target.value) }
@@ -64,7 +64,7 @@ export default function RegisterScreen() {
                 variant='primary'
                 className='mt-3'
             >
-                Register
+                Sign Up
             </Button>
 
             <Row className='py-3'>

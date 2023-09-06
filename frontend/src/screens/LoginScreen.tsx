@@ -16,7 +16,7 @@ export default function LoginScreen() {
     const dispatch = useDispatch();
 
     const [login, { isLoading }] = useLoginMutation();
-
+ 
     const { userInfo } = useSelector((state: any) => state.auth);
 
     useEffect(() => {

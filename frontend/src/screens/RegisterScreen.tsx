@@ -1,7 +1,12 @@
-import { useState, FormEvent  } from 'react';
+import { useState, useEffect, FormEvent  } from 'react';
 import { Form, Button, Row, Col } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import Loader from '../components/Loader';
 import FormContainer from '../components/FormContainer';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useRegisterMutation } from '../slices/usersApiSlice';
+import { setCredentials } from '../slices/authSlice';
+import { toast } from 'react-toastify';
 
 export default function RegisterScreen() {
     const [name, setName] = useState('');
@@ -9,15 +14,38 @@ export default function RegisterScreen() {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+  
+    const [register, { isLoading }] = useRegisterMutation();
+  
+    const { userInfo } = useSelector((state: any) => state.auth);
+  
+    useEffect(() => {
+      if (userInfo) {
+        navigate('/');
+      }
+    }, [navigate, userInfo]);
+
     const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log('submit');
-    }
+        if (password !== confirmPassword) {
+          toast.error('Passwords do not match');
+        } else {
+          try {
+            const res = await register({ name, email, password }).unwrap();
+            dispatch(setCredentials({ ...res }));
+            navigate('/');
+          } catch (err: any) {
+            toast.error(err?.data?.message || err.error);
+          }
+        }
+      };
 
   return (
     <FormContainer>
         <h1>Sign Up</h1>
-
+ 
         <Form onSubmit={ submitHandler }>
             <Form.Group className='my-2' controlId='name'>
                 <Form.Label>Name</Form.Label>
@@ -64,15 +92,17 @@ export default function RegisterScreen() {
                 variant='primary'
                 className='mt-3'
             >
-                Register
+                Sign Up
             </Button>
-
-            <Row className='py-3'>
-                <Col>
-                    Already have an account? <Link to={`/login`}>Login</Link>
-                </Col>
-            </Row>
+            
+            {isLoading && <Loader />}
         </Form>
+
+        <Row className='py-3'>
+            <Col>
+                Already have an account? <Link to={`/login`}>Login</Link>
+            </Col>
+        </Row>
     </FormContainer>
   )
 }

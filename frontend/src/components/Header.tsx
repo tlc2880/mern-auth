@@ -31,7 +31,7 @@ const Header = () => {
         <Container>
 
             <LinkContainer to='/'>
-                <Navbar.Brand>MERN Auth</Navbar.Brand>
+                <Navbar.Brand>MERN Auth TypeScript</Navbar.Brand>
             </LinkContainer> 
             
             <Navbar.Toggle aria-controls='basic-navbar-nav' />
@@ -69,4 +69,5 @@ const Header = () => {
     </header>
   );
 };
+
 export default Header;

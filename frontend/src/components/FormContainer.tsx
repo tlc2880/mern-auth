@@ -4,7 +4,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 interface childrenProps {
   children: ReactNode;
 }
-
+ 
 export default function FormContainer({ children }: childrenProps) {
    
   return (

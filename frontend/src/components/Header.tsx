@@ -29,6 +29,7 @@ const Header = () => {
     <header>
       <Navbar bg='dark' variant='dark' expand='lg' collapseOnSelect>
         <Container>
+
             <LinkContainer to='/'>
                 <Navbar.Brand>MERN Auth TypeScript</Navbar.Brand>
             </LinkContainer> 
@@ -68,5 +69,5 @@ const Header = () => {
     </header>
   );
 };
- 
+
 export default Header;

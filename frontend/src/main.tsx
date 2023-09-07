@@ -17,7 +17,6 @@ import RegisterScreen from './screens/RegisterScreen.tsx'
 import ProfileScreen from './screens/ProfileScreen.tsx';
 import PrivateRoute from './components/PrivateRoute.tsx';
 
- 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={ <App />}>
